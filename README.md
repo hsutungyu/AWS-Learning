@@ -6,7 +6,13 @@ EC2
 Autoscaling group  
 ELB  
 DynamoDB  
+IAM role for EC2 instance to use DynamoDB  
 
 ## python package
-Flask for simple web development
+Flask for simple web development  
+waitress for web server on EC2 instance  
+
+## Linux
+tmux for continuously running the web server on EC2 instance  
+iptables for forwarding port 80 to port 8080  
 
