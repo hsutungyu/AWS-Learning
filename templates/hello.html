@@ -1,8 +1,12 @@
 <!DOCTYPE html>
-
+<head>
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='style.css')}}"/>
+</head>
 <title>Random Movie</title>
-
+<div class="row">
 {% if title %}
+ <div class="column">
+ <h2>A Random Movie Information for you</h2>
  <h4>Introducing {{ title }}!</h4>
  {% if year %}
  <h5>Year:</h5>
@@ -79,7 +83,31 @@
  {% else %}
  <h5>Unknown Actors</h5>
  {% endif %}
- 
+</div>
 {% else %}
  <h4>Hello, World!</h4>
 {% endif %}
+<div class="column">
+    <h2>Or you can Provide Your own Movie Information...</h2>
+    <form action="{{ url_for('add') }}" method="POST">
+        <h5>Year:</h5>
+        <input type="text" name="yearInput">
+        <h5>Title:</h5>
+        <input type="text" name="titleInput">
+        <h5>Director(s) [One name per line]</h5>
+        <textarea type="text" name="directorsInput"></textarea>
+        <h5>Release Date</h5>
+        <input type="date" name="releaseDateInput">
+        <h5>Genres</h5>
+        <input type="text" name="genresInput">
+        <h5>Plot</h5>
+        <input type="text" name="plotInput">
+        <h5>Rank</h5>
+        <input type="text" name="rankInput">
+        <h5>Actor(s) [One name per line]</h5>
+        <textarea type="text" name="actorsInput"></textarea>
+        <br><br><br>
+        <input type="submit" value="Submit Information">
+    </form>
+</div>
+</div>

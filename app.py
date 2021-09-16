@@ -1,8 +1,9 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 import boto3
 import uuid
 from boto3.dynamodb.conditions import Key
 from decimal import Decimal
+from datetime import datetime
 
 app = Flask(__name__)
 
@@ -39,3 +40,37 @@ def hello(title=None, year=None, director=None, release_date=None, rating=None, 
     if 'actors' in randomItem['Items'][0]['info']:
         actors = randomItem['Items'][0]['info']['actors']
     return render_template('hello.html', title=title, year=year, director=director, release_date=release_date, rating=rating, genres=genres, image_url=image_url, plot=plot, rank=rank, running_time_secs=running_time_secs, actors=actors)
+
+@app.route("/add", methods=['POST'])
+def add():
+    # assume that the user would input both year and title
+    # in reality, can do form validation using javascript before posting to /add
+    year = Decimal(request.form['yearInput'])
+    title = request.form['titleInput']
+    info = {}
+    if request.form['directorsInput']:
+        info['directors'] = request.form['directorsInput'].split()
+    if request.form['releaseDateInput']:
+        info['release_date'] = request.form['releaseDateInput']
+    if request.form['genresInput']:
+        info['genres'] = request.form['genresInput'].split()
+    if request.form['plotInput']:
+        info['plot'] = request.form['plotInput']
+    if request.form['rankInput']:
+        info['rank'] = request.form['rankInput']
+    if request.form['actorsInput']:
+        info['actors'] = request.form['actorsInput'].split()
+    dynamodb = boto3.resource('dynamodb')
+    table = dynamodb.Table('Movies')
+    randomuuid = str(uuid.uuid4())
+    putItem = table.put_item(
+        Item={
+            'year': year,
+            'title': title,
+            'info': info,
+            'randomid': randomuuid,
+            'test': 1
+        }
+    )
+    statusCode = putItem['ResponseMetadata']['HTTPStatusCode']
+    return render_template('add.html', statusCode=statusCode)

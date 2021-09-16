@@ -1,0 +1,20 @@
+<!DOCTYPE HTML>
+{% if statusCode == 200 %}
+<h3>Submission Complete!</h3>
+<h4>Thank you!</h4>
+<button id="returnToIndex">Return to Index</button>
+<script type="text/javascript">
+    document.getElementById("returnToIndex").onclick = function() {
+        location.href = "/"
+    }
+</script>
+{% else %}
+<h3>Submission Failed!</h3>
+<h4>Try again!</h4>
+<button id="returnToIndex">Return to Index</button>
+<script type="text/javascript">
+    document.getElementById("returnToIndex").onclick = function() {
+        location.href = "/"
+    }
+</script>
+{% endif %}

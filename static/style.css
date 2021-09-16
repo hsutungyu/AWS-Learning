@@ -1,0 +1,19 @@
+.column {
+  float: left;
+  width: 50%;
+}
+
+/* w3schools */
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* https://stackoverflow.com/questions/24561037/textarea-and-input-have-different-widths */
+textarea, input {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
