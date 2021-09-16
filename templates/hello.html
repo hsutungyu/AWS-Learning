@@ -1,7 +1,85 @@
 <!DOCTYPE html>
+
 <title>Random Movie</title>
-{% if movie %}
- <h4>Introducing {{ movie }}!</h4>
+
+{% if title %}
+ <h4>Introducing {{ title }}!</h4>
+ {% if year %}
+ <h5>Year:</h5>
+ <a> {{ year }}</a>
+ {% else %}
+ <h5>Unknown Year</h5>
+ {% endif %}
+
+ {% if director %}
+ <h5>Director(s):</h5>
+ {% for x in director %}
+ <a>{{ x }}</a><br>
+ {% endfor %}
+ {% else %}
+ <h5>Unknown Directors</h5>
+ {% endif %}
+
+ {% if release_date %}
+ <h5>Release Date:</h5>
+ <a>{{ release_date }}</a>
+ {% else %}
+ <h5>Unknown Release Date</h5>
+ {% endif %}
+
+ {% if rating %}
+ <h5>Rating:</h5>
+ <a>{{ rating }} out of 10.0</a>
+ {% else %}
+ <h5>Unknown Rating</h5>
+ {% endif %}
+
+ {% if genres %}
+ <h5>Genre(s):</h5>
+ {% for x in genres %}
+ <a>{{ x }}</a><br>
+ {% endfor %}
+ {% else %}
+ <h5>Unknown Genres</h5>
+ {% endif %}
+
+ {% if image_url %}
+ <h5>Poster:</h5>
+ <img src="{{ image_url }}">
+ {% else %}
+ <h5>No Available Poster</h5>
+ {% endif %}
+
+ {% if plot %}
+ <h5>Plot:</h5>
+ <p>{{ plot }}</p>
+ {% else %}
+ <h5>Unknown Plot</h5>
+ {% endif %}
+
+ {% if rank %}
+ <h5>Rank:</h5>
+ <a>{{ rank }} out of 5000</a>
+ {% else %}
+ <h5>Unknown Rank</h5>
+ {% endif %}
+
+ {% if running_time_secs %}
+ <h5>Running Time:</h5>
+ <a>{{ running_time_secs }} seconds</a>
+ {% else %}
+ <h5>Unknown Running Time</h5>
+ {% endif %}
+
+ {% if actors %}
+ <h5>Actor(s):</h5>
+ {% for x in actors %}
+ <a>{{ x }}</a><br>
+ {% endfor %}
+ {% else %}
+ <h5>Unknown Actors</h5>
+ {% endif %}
+ 
 {% else %}
  <h4>Hello, World!</h4>
 {% endif %}
