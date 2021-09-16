@@ -4,12 +4,13 @@ import uuid
 from boto3.dynamodb.conditions import Key
 from decimal import Decimal
 from datetime import datetime
+from waitress import serve
 
 app = Flask(__name__)
 
 @app.route("/")
 def hello(title=None, year=None, director=None, release_date=None, rating=None, genres=None, image_url=None, plot=None, rank=None, running_time_secs=None, actors=None):
-    dynamodb = boto3.resource('dynamodb')
+    dynamodb = boto3.resource('dynamodb', region_name='ap-east-1')
     table = dynamodb.Table('Movies')
     randomuuid = str(uuid.uuid4())
     randomItem = table.query(
@@ -60,7 +61,7 @@ def add():
         info['rank'] = request.form['rankInput']
     if request.form['actorsInput']:
         info['actors'] = request.form['actorsInput'].split()
-    dynamodb = boto3.resource('dynamodb')
+    dynamodb = boto3.resource('dynamodb', region_name='ap-east-1')
     table = dynamodb.Table('Movies')
     randomuuid = str(uuid.uuid4())
     putItem = table.put_item(
@@ -74,3 +75,6 @@ def add():
     )
     statusCode = putItem['ResponseMetadata']['HTTPStatusCode']
     return render_template('add.html', statusCode=statusCode)
+
+if __name__ == "__main__":
+    serve(app, port=80)
