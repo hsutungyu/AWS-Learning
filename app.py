@@ -77,4 +77,6 @@ def add():
     return render_template('add.html', statusCode=statusCode)
 
 if __name__ == "__main__":
-    serve(app, port=80)
+    # https://stackoverflow.com/questions/21193988/keep-server-running-on-ec2-instance-after-ssh-is-terminated
+    # https://stackoverflow.com/questions/12464926/linux-in-ec2amazon-cannot-use-port-80-for-tomcat
+    serve(app, port=8080)
