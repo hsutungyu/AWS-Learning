@@ -7,10 +7,12 @@ Autoscaling group
 ELB  
 DynamoDB  
 IAM role for EC2 instance to use DynamoDB  
+Elastic Beanstalk to deploy the application directly  
 
 ## python package
 Flask for simple web development  
 waitress for web server on EC2 instance  
+gunicorn for web server on Elastic Beanstalk  
 
 ## Linux
 tmux for continuously running the web server on EC2 instance  

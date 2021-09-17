@@ -80,4 +80,6 @@ def add():
 if __name__ == "__main__":
     # https://stackoverflow.com/questions/21193988/keep-server-running-on-ec2-instance-after-ssh-is-terminated
     # https://stackoverflow.com/questions/12464926/linux-in-ec2amazon-cannot-use-port-80-for-tomcat
+    # https://sean22492249.medium.com/flask-with-gunicorn-9a37bca29227
+    # https://camillovisini.com/article/barebone-flask-website-on-aws-elastic-beanstalk/#deployment-to-aws-elastic-beanstalk
     application.run()
