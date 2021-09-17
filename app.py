@@ -9,7 +9,7 @@ from waitress import serve
 # Elastic Beanstalk looks for application callable
 application = Flask(__name__)
 
-@app.route("/")
+@application.route("/")
 def hello(title=None, year=None, director=None, release_date=None, rating=None, genres=None, image_url=None, plot=None, rank=None, running_time_secs=None, actors=None):
     dynamodb = boto3.resource('dynamodb', region_name='ap-east-1')
     table = dynamodb.Table('Movies')
@@ -43,7 +43,7 @@ def hello(title=None, year=None, director=None, release_date=None, rating=None, 
         actors = randomItem['Items'][0]['info']['actors']
     return render_template('hello.html', title=title, year=year, director=director, release_date=release_date, rating=rating, genres=genres, image_url=image_url, plot=plot, rank=rank, running_time_secs=running_time_secs, actors=actors)
 
-@app.route("/add", methods=['POST'])
+@application.route("/add", methods=['POST'])
 def add():
     # assume that the user would input both year and title
     # in reality, can do form validation using javascript before posting to /add
@@ -80,4 +80,4 @@ def add():
 if __name__ == "__main__":
     # https://stackoverflow.com/questions/21193988/keep-server-running-on-ec2-instance-after-ssh-is-terminated
     # https://stackoverflow.com/questions/12464926/linux-in-ec2amazon-cannot-use-port-80-for-tomcat
-    serve(app, port=8080)
+    application.run()
