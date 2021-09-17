@@ -6,7 +6,8 @@ from decimal import Decimal
 from datetime import datetime
 from waitress import serve
 
-app = Flask(__name__)
+# Elastic Beanstalk looks for application callable
+application = Flask(__name__)
 
 @app.route("/")
 def hello(title=None, year=None, director=None, release_date=None, rating=None, genres=None, image_url=None, plot=None, rank=None, running_time_secs=None, actors=None):
