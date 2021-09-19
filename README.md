@@ -13,6 +13,7 @@ ELB
 DynamoDB  
 IAM role for EC2 instance to use DynamoDB  
 Elastic Beanstalk to deploy the application directly  
+Lambda and API Gateway for REST API
 
 ## python package
 Flask for simple web development  
