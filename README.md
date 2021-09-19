@@ -4,7 +4,7 @@ Trying out different services of AWS by loosely following the tutorial from http
 ## live website
 http://ec2test-env.eba-iwvbnmgv.ap-east-1.elasticbeanstalk.com/  
 a website that displays random movie information (JSON data from Amazon DynamoDB official tutorial);  
-also allows users to submit movie information
+allows users to submit movie information
 
 ## Used AWS Services
 EC2  
@@ -25,3 +25,8 @@ iptables for port forwarding
 
 ## docker
 used `docker` and `docker-compose` to dockerize the application
+
+## 3-tier architecture
+presentation tier: HTML  
+application tier: python with `flask` and `boto3`  
+data tier: DynamoDB from AWS
