@@ -22,3 +22,6 @@ gunicorn for web server on Elastic Beanstalk
 ## Linux
 tmux for continuously running the web server on EC2 instance  
 iptables for port forwarding  
+
+## docker
+used `docker` and `docker-compose` to dockerize the application
