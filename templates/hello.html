@@ -88,6 +88,12 @@
  <h4>Hello, World!</h4>
 {% endif %}
 <div class="column">
+    {% if apiString %}
+    <h2>Using REST API:</h2>
+    <h3>{{ apiString }}</h3>
+    {% else %}
+    <h2>API is not working...</h2>
+    {% endif %}
     <h2>Or you can Provide Your own Movie Information...</h2>
     <form action="{{ url_for('add') }}" method="POST">
         <h5>Year:</h5>
