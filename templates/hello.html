@@ -88,9 +88,11 @@
  <h4>Hello, World!</h4>
 {% endif %}
 <div class="column">
-    {% if apiString %}
-    <h2>Using REST API:</h2>
-    <h3>{{ apiString }}</h3>
+    {% if apiInfo %}
+    <h2>Using REST API to show five other movie information for you:</h2>
+    {% for i in range(5) %}
+    <h5>{{ apiInfo['title'][i] }} premiered in {{ apiInfo['year'][i] }}</h5>
+    {% endfor %}
     {% else %}
     <h2>API is not working...</h2>
     {% endif %}

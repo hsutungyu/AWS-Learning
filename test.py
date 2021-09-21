@@ -3,6 +3,7 @@ import json
 import uuid
 from boto3.dynamodb.conditions import Key
 from decimal import Decimal
+import requests
 
 
 
@@ -74,15 +75,18 @@ if __name__ == '__main__':
     randomuuid = str(uuid.uuid4())
     #index = table.Index('')
     # movie_table = create_movie_table()
-    with open('moviedata.json') as f:
-        moviedata = json.load(f, parse_float=Decimal)
+    #with open('moviedata.json') as f:
+	#    moviedata = json.load(f, parse_float=Decimal)
     #movie_table_uuid(moviedata)
     #movie_table_for_query(moviedata)
-    randomItem = table.query(
-        IndexName="test-randomid-index",
-        KeyConditionExpression=Key('test').eq(Decimal(1)) & Key('randomid').gt(randomuuid),
-        Limit=1
-    )
-    print(randomItem['Items'])
+    # randomItem = table.query(
+    #     IndexName="test-randomid-index",
+    #     KeyConditionExpression=Key('test').eq(Decimal(1)) & Key('randomid').gt(randomuuid),
+    #     Limit=5
+    # )
+    # print(randomItem['Items'][5])
+    response = requests.get("https://df2k401ugi.execute-api.ap-east-1.amazonaws.com/beta/fivemovies")
+    jsonString = json.loads(response.json()['body'])
+    #print(type(yearList))
     # print("Table status:", movie_table.table_status)
 

@@ -6,12 +6,13 @@ from decimal import Decimal
 from datetime import datetime
 from waitress import serve
 import requests
+import json
 
 # Elastic Beanstalk looks for application callable
 application = Flask(__name__)
 
 @application.route("/")
-def hello(title=None, year=None, director=None, release_date=None, rating=None, genres=None, image_url=None, plot=None, rank=None, running_time_secs=None, actors=None, apiString=None):
+def hello(title=None, year=None, director=None, release_date=None, rating=None, genres=None, image_url=None, plot=None, rank=None, running_time_secs=None, actors=None, apiYear=None, apiInfo=None):
     # DynamoDB part
     dynamodb = boto3.resource('dynamodb', region_name='ap-east-1')
     table = dynamodb.Table('Movies')
@@ -45,9 +46,10 @@ def hello(title=None, year=None, director=None, release_date=None, rating=None, 
         actors = randomItem['Items'][0]['info']['actors']
 
     # REST api part
-    response = requests.get(f"https://szzm5yalg8.execute-api.ap-east-1.amazonaws.com/test/helloworld?year={year}&title={title}")
-    apiString = response.json()['message']
-    return render_template('hello.html', title=title, year=year, director=director, release_date=release_date, rating=rating, genres=genres, image_url=image_url, plot=plot, rank=rank, running_time_secs=running_time_secs, actors=actors, apiString=apiString)
+    # randomly get the year and the title of five movies
+    response = requests.get("https://df2k401ugi.execute-api.ap-east-1.amazonaws.com/beta/fivemovies")
+    apiInfo = json.loads(response.json()['body'])
+    return render_template('hello.html', title=title, year=year, director=director, release_date=release_date, rating=rating, genres=genres, image_url=image_url, plot=plot, rank=rank, running_time_secs=running_time_secs, actors=actors, apiYear=apiYear, apiInfo=apiInfo)
 
 @application.route("/add", methods=['POST'])
 def add():
